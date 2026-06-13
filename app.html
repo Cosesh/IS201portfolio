@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Powder Day Picker</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    background: linear-gradient(to bottom, #0b1d3a, #1f4068 60%, #ffffff);
+    color: #f5faff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  h1 {
+    margin-top: 0;
+    font-size: 1.8rem;
+  }
+
+  p.subtitle {
+    color: #cfe8ff;
+    margin-bottom: 25px;
+  }
+
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .options button {
+    flex: 1 1 auto;
+    min-width: 90px;
+    padding: 10px 14px;
+    border: 2px solid #aee0ff;
+    background: transparent;
+    color: #f5faff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.15s ease-in-out;
+  }
+
+  .options button.selected,
+  .options button:hover {
+    background: #aee0ff;
+    color: #0b1d3a;
+    font-weight: bold;
+  }
+
+  #pickBtn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: #ff8c42;
+    color: #1b2a4a;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out, background 0.2s;
+    margin-top: 10px;
+  }
+
+  #pickBtn:hover {
+    background: #ffa75e;
+    transform: translateY(-2px);
+  }
+
+  #result {
+    margin-top: 20px;
+    min-height: 90px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.25);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .result-title {
+    font-weight: bold;
+    color: #aee0ff;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.15rem;
+  }
+
+  /* Falling snow */
+  .snow {
+    position: absolute;
+    top: -10px;
+    color: #ffffff;
+    opacity: 0.8;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) translateX(20px);
+      opacity: 0.2;
+    }
+  }
+
+  .group-label {
+    font-weight: bold;
+    margin: 15px 0 8px 0;
+    text-align: left;
+    color: #aee0ff;
+  }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>❄️ Powder Day Picker</h1>
+    <p class="subtitle">Tell me your mood and I'll pick your perfect run for the day.</p>
+
+    <div class="group-label">How are you feeling?</div>
+    <div class="options" id="moodOptions">
+      <button data-value="chill">Chill</button>
+      <button data-value="adventurous">Adventurous</button>
+      <button data-value="competitive">Competitive</button>
+    </div>
+
+    <div class="group-label">Pick your difficulty</div>
+    <div class="options" id="diffOptions">
+      <button data-value="green">Green</button>
+      <button data-value="blue">Blue</button>
+      <button data-value="black">Black</button>
+    </div>
+
+    <button id="pickBtn">Pick My Run 🎿</button>
+
+    <div id="result">
+      <span class="result-title">Your result will appear here</span>
+      Choose a mood and difficulty, then hit the button!
+    </div>
+  </div>
+
+  <script>
+    // Snow animation
+    const body = document.body;
+    for (let i = 0; i < 40; i++) {
+      const flake = document.createElement('div');
+      flake.className = 'snow';
+      flake.textContent = '❄';
+      flake.style.left = Math.random() * 100 + 'vw';
+      flake.style.fontSize = (Math.random() * 14 + 8) + 'px';
+      flake.style.animationDuration = (Math.random() * 8 + 6) + 's';
+      flake.style.animationDelay = (Math.random() * 8) + 's';
+      body.appendChild(flake);
+    }
+
+    let selectedMood = null;
+    let selectedDiff = null;
+
+    function setupGroup(containerId, onSelect) {
+      const container = document.getElementById(containerId);
+      container.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          container.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          onSelect(btn.dataset.value);
+        });
+      });
+    }
+
+    setupGroup('moodOptions', val => selectedMood = val);
+    setupGroup('diffOptions', val => selectedDiff = val);
+
+    // Run suggestions keyed by [mood][difficulty]
+    const runs = {
+      chill: {
+        green: ["Sunny Meadow Loop — a gentle, wide groomer perfect for cruising with friends.",
+                "Pine Glade Trail — long, mellow, and great for warming up the legs."],
+        blue: ["Aspen Ridge — rolling terrain with great views, nothing too steep.",
+               "Lazy River Run — wide turns and a relaxed pace all the way down."],
+        black: ["Quiet Ridge Steeps — a short, steep pitch but uncrowded so you can take it slow.",
+                "Backside Bowl (mellow line) — pick the gentlest line through and enjoy the solitude."]
+      },
+      adventurous: {
+        green: ["Treeline Wander — duck through the glades next to the trail for some easy powder stashes.",
+                "Sidecountry Cruiser — an easy run with a few fun natural rollers to play on."],
+        blue: ["Powder Stash Traverse — hike a little for untouched snow off the main blue.",
+               "Glade Run 7 — weave through the trees for a more exciting line down."],
+        black: ["Cliffhanger Couloir — a narrow, exciting chute with a big payoff view at the bottom.",
+                "Double Diamond Glades — tight trees, steep pitches, and total commitment."]
+      },
+      competitive: {
+        green: ["Race Course Replica — lay down some clean carving turns and time yourself.",
+                "Speed Lane — open and fast, perfect for seeing how quick you can go (safely!)."],
+        blue: ["GS Training Run — rhythmic turns down a consistent pitch, great for technique.",
+               "Mogul Alley — test your speed and agility through the bumps."],
+        black: ["Summit Showdown — the steepest, longest run on the mountain. Bragging rights await.",
+                "Extreme Face — for when you want the ultimate personal challenge."]
+      }
+    };
+
+    document.getElementById('pickBtn').addEventListener('click', () => {
+      const result = document.getElementById('result');
+      if (!selectedMood || !selectedDiff) {
+        result.innerHTML = '<span class="result-title">Almost there!</span> Please pick a mood and a difficulty first.';
+        return;
+      }
+      const options = runs[selectedMood][selectedDiff];
+      const choice = options[Math.floor(Math.random() * options.length)];
+      result.style.opacity = 0;
+      setTimeout(() => {
+        result.innerHTML = `<span class="result-title">Your Run: </span>${choice}`;
+        result.style.opacity = 1;
+      }, 150);
+    });
+  </script>
+
+</body>
+</html>

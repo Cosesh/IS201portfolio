@@ -1,0 +1,9 @@
+/* Small custom tweaks for the Bootstrap-themed pages */
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+header img {
+  border: 3px solid #ffffff;
+}
