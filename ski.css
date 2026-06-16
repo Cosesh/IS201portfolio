@@ -1,79 +1,448 @@
-/* ===== Skiing Page Stylesheet ===== */
+/* =====================================================
+   ski.css — Custom Stylesheet for Skiing Page
+   Colton Sessions | IS 201 Final Project
 
+   This stylesheet demonstrates:
+   1. Overwriting default HTML element styles (body, h1, h2, ul, a, etc.)
+   2. External stylesheet linked from scratch.html
+   3. Custom class selectors, background colors, underline, text-align
+   4. Link state styling: hover and visited
+   5. Box model: margin, padding, and border on multiple elements
+   6. Font color and font family on multiple elements
+   ===================================================== */
+
+
+/* =====================================================
+   FIXED POSITIONING: ski-fixed-nav stays anchored to
+   the top of the browser window while the user scrolls.
+   (Fixed Positioning video)
+   z-index: 1000 keeps it layered above all other content.
+   (Positioning with Z-index and Float video)
+   ===================================================== */
+.ski-fixed-nav {
+  position: fixed;              /* fixed: anchored to browser window, not the page */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;               /* z-index: sits on top of all other elements */
+  background: rgba(13, 31, 60, 0.95);
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 10px 20px;          /* box model: padding */
+  border-bottom: 2px solid #f47b20; /* box model: border */
+}
+
+.ski-fixed-nav a {
+  color: #cce0ff;              /* font color */
+  font-family: 'Segoe UI', Arial, sans-serif; /* font family */
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 4px 12px;           /* box model: padding */
+  border-radius: 20px;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* hover state on fixed nav links (Style Link States: hover, visited) */
+.ski-fixed-nav a:hover {
+  background: #f47b20;         /* background changes on hover */
+  color: #ffffff;              /* font color changes on hover */
+}
+
+/* visited state on fixed nav links */
+.ski-fixed-nav a:visited {
+  color: #aaccff;              /* font color: visited links appear lighter */
+}
+
+/* Push body content down so the fixed nav doesn't cover it */
 body {
+  padding-top: 48px;
+}
+
+
+/* =====================================================
+   SECTION 1: Overwrite default HTML element styles
+   These rules replace the browser's built-in defaults
+   for body, h1, h2, p, ul, li, and a elements.
+   ===================================================== */
+
+/* Override default browser margin/padding on everything */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: #1b2a4a;
-  background-color: #eaf4fb;
-  background-image: linear-gradient(to bottom, #cfe8f7, #eaf4fb 400px);
+  padding: 0;
 }
 
-.page-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+/* Override default body font, color, and background */
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* font family */
+  color: #1b2a4a;                /* font color — overrides browser default black */
+  background-color: #f0f6ff;    /* custom background color */
 }
 
-/* Header div */
-.header-box {
-  text-align: center;
-  background-color: #1b2a4a;
-  color: #ffffff;
-  padding: 30px 20px;
-  border-radius: 10px;
-  margin-bottom: 25px;
+/* Override default h2 styling */
+h2 {
+  font-size: 1.7rem;
+  color: #0d1f3c;               /* font color on headings */
+  font-family: 'Trebuchet MS', Arial, sans-serif; /* font family on headings */
+  margin-bottom: 10px;
 }
 
-.header-box h1 {
-  font-family: 'Trebuchet MS', sans-serif;
-  margin: 0;
+/* Override default anchor tag color and underline */
+a {
+  color: #1a4fa0;               /* font color — overrides default blue */
+  text-decoration: none;        /* removes default underline from all links */
+}
+
+/* Override default list styling */
+ul, ol {
+  padding-left: 20px;
+}
+
+
+/* =====================================================
+   SECTION 2: Custom background color and background image
+   The header uses a gradient as its background.
+   The body uses a solid custom background color (above).
+   ===================================================== */
+
+/* Header div — custom gradient background image */
+.ski-header {
+  background-image: linear-gradient(to bottom right, #0d1f3c, #1a4fa0, #2d6fd6);
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative snowflake texture overlay */
+.ski-header::before {
+  content: '❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄  ❄';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.08);
+  letter-spacing: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Orange accent line at bottom of header */
+.ski-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #f47b20, #ff9a45, #f47b20);
+}
+
+/* Centered content inside the header div */
+.header-overlay {
+  text-align: center;           /* text-align: center */
+  z-index: 2;
+  padding: 40px 20px;           /* box model: padding */
+}
+
+
+/* =====================================================
+   SECTION 3: Font color and font family definitions
+   ===================================================== */
+
+/* Main page title — custom font family and white color */
+.ski-title {
+  font-family: 'Trebuchet MS', 'Arial Black', sans-serif; /* font family */
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #ffffff;               /* font color: white on dark background */
+  letter-spacing: 2px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  margin-bottom: 12px;          /* box model: margin */
+}
+
+/* Subtitle below the title */
+.ski-subtitle {
+  font-family: 'Segoe UI', Arial, sans-serif; /* font family */
+  font-size: 1.1rem;
+  color: #aee0ff;               /* font color: light blue */
+  margin-bottom: 28px;          /* box model: margin */
   letter-spacing: 1px;
 }
 
-/* Generic content div */
-.content-box {
-  background-color: #ffffff;
-  border: 1px solid #cfe0ec;
-  border-radius: 10px;
-  padding: 20px 25px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+/* Section intro text color */
+.section-intro {
+  color: #556080;               /* font color: muted blue-gray */
+  margin-bottom: 20px;          /* box model: margin */
+  font-size: 1.05rem;
 }
 
-.content-box h2 {
-  font-family: 'Trebuchet MS', sans-serif;
-  color: #1f6feb;
-  margin-top: 0;
-}
 
-/* Image styling */
-.ski-img {
-  max-width: 100%;
+/* =====================================================
+   SECTION 4: Custom class selectors with background,
+   underline, and text-align
+   ===================================================== */
+
+/* Highlight box — demonstrates background + border */
+.highlight-box {
+  background-color: #fff8f0;    /* custom background color on a class */
+  border: 2px solid #f47b20;   /* box model: border */
   border-radius: 8px;
-  display: block;
-  margin: 0 auto 15px auto;
+  padding: 14px 18px;           /* box model: padding */
+  margin: 16px 0;               /* box model: margin */
+  text-align: left;
 }
 
-/* Nav links */
-.nav-link {
-  color: #aee0ff;
+/* Underlined accent text — demonstrates text-decoration: underline */
+.underline-accent {
+  text-decoration: underline;   /* underline style */
+  text-decoration-color: #f47b20;
+  text-underline-offset: 4px;
+  font-weight: 700;
+  color: #1a4fa0;               /* font color */
+}
+
+/* Text alignment classes */
+.text-center {
+  text-align: center;           /* text-align: center */
+}
+
+.text-left {
+  text-align: left;             /* text-align: left */
+}
+
+/* Orange accent divider bar */
+.orange-bar {
+  width: 50px;
+  height: 4px;
+  background: #f47b20;          /* custom background color */
+  border-radius: 2px;
+  margin-bottom: 24px;          /* box model: margin */
+}
+
+
+/* =====================================================
+   SECTION 5: Link state styling — hover and visited
+   ===================================================== */
+
+/* Navigation links in the header */
+.ski-nav a {
+  color: #ffffff;               /* font color: white */
   text-decoration: none;
-  font-weight: bold;
+  border: 2px solid rgba(255,255,255,0.4); /* box model: border */
+  border-radius: 30px;
+  padding: 8px 22px;            /* box model: padding */
+  margin: 4px;                  /* box model: margin */
+  font-weight: 600;
+  font-family: 'Segoe UI', Arial, sans-serif; /* font family */
+  transition: background 0.2s, border-color 0.2s;
+  display: inline-block;
 }
 
-.nav-link:hover {
-  text-decoration: underline;
+/* Hover state — changes background and border when mouse is over link */
+.ski-nav a:hover {
+  background: #f47b20;          /* background changes on hover */
+  border-color: #f47b20;
+  color: #fff;                  /* font color changes on hover */
 }
 
-.content-box .nav-link {
-  color: #1f6feb;
+/* Visited state — so visited nav links look slightly different */
+.ski-nav a:visited {
+  color: #d0eaff;               /* font color: visited links appear lighter */
 }
 
-/* Video embed wrapper - responsive 16:9 */
+/* Body-level ski links */
+.ski-link {
+  color: #1a4fa0;               /* font color */
+  font-weight: 700;
+  text-decoration: none;
+  font-family: 'Segoe UI', Arial, sans-serif; /* font family */
+}
+
+/* Hover state — underline appears on hover */
+.ski-link:hover {
+  color: #f47b20;               /* font color changes on hover */
+  text-decoration: underline;   /* underline appears on hover */
+}
+
+/* Visited state — visited ski-links turn a muted purple */
+.ski-link:visited {
+  color: #7755aa;               /* font color: visited links */
+}
+
+
+/* =====================================================
+   SECTION 6: Box Model — Margin, Padding, and Border
+   Explicitly demonstrated on multiple elements
+   ===================================================== */
+
+/* Section wrapper div — uses margin and padding */
+.ski-section {
+  padding: 50px 20px;           /* box model: padding (top/bottom 50px, left/right 20px) */
+  /* No margin here — sections stack edge-to-edge */
+}
+
+/* Alternate background sections */
+.alt-bg {
+  background-color: #e4f0fb;    /* custom background color */
+}
+
+/* Card div — uses padding, margin (auto centering), and border (via shadow) */
+.ski-card {
+  max-width: 860px;
+  margin: 0 auto;               /* box model: margin (auto centers the card) */
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 36px 40px;           /* box model: padding (inner spacing) */
+  border: 1px solid #ddeeff;   /* box model: border */
+  box-shadow: 0 4px 24px rgba(13,31,60,0.10);
+}
+
+/* Resort list items — explicit border, padding, margin */
+.resort-list > li {
+  margin-bottom: 20px;          /* box model: margin between list items */
+  font-size: 1rem;
+}
+
+.resort-list ul {
+  list-style: none;
+  padding-left: 16px;           /* box model: padding indents nested list */
+  margin-top: 8px;              /* box model: margin separates from parent label */
+}
+
+.resort-list ul li {
+  padding: 5px 0 5px 12px;     /* box model: padding inside each resort item */
+  color: #334055;               /* font color */
+  border-left: 3px solid #f47b20; /* box model: border on left side */
+  margin-bottom: 4px;           /* box model: margin between items */
+}
+
+/* Region label styling */
+.region-label {
+  font-family: 'Trebuchet MS', Arial, sans-serif; /* font family */
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #1a4fa0;               /* font color */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   SECTION 7: Three divs for positioning and layout
+   .ski-header, .ski-section/.ski-card, .ski-two-col
+   ===================================================== */
+
+/* Two-column layout div */
+.ski-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.ski-two-col p {
+  line-height: 1.8;
+  color: #334055;               /* font color */
+  margin-bottom: 14px;          /* box model: margin */
+}
+
+/* Stats box div — dark background, centered content */
+.ski-stat-box {
+  background: linear-gradient(135deg, #0d1f3c, #1a4fa0); /* custom background */
+  border-radius: 14px;
+  padding: 24px;                /* box model: padding */
+  border: 2px solid rgba(255,255,255,0.1); /* box model: border */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.ski-stat {
+  text-align: center;           /* text-align: center */
+}
+
+.stat-num {
+  display: block;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #f47b20;               /* font color: orange */
+  font-family: 'Trebuchet MS', Arial, sans-serif; /* font family */
+}
+
+.stat-label {
+  display: block;
+  color: #aee0ff;               /* font color: light blue */
+  font-size: 0.85rem;
+  margin-top: 2px;              /* box model: margin */
+  letter-spacing: 0.5px;
+}
+
+
+/* =====================================================
+   SECTION 8: Span element and inline styles
+   The span class below is applied to inline text
+   in the HTML using <span class="highlight-word">
+   ===================================================== */
+
+/* Inline span styling — used inside paragraphs */
+.highlight-word {
+  color: #f47b20;               /* font color: orange highlight */
+  font-weight: 700;
+  font-family: 'Trebuchet MS', sans-serif; /* font family */
+}
+
+/* Another span style for emphasized inline text */
+.inline-blue {
+  color: #1a4fa0;               /* font color: blue */
+  font-style: italic;
+}
+
+
+/* =====================================================
+   SECTION 9: Image, video, and Tableau styling
+   ===================================================== */
+
+/* Ski photo image styling */
+.ski-photo {
+  max-width: 100%;
+  border-radius: 12px;
+  border: 3px solid #ddeeff;   /* box model: border around image */
+  box-shadow: 0 6px 24px rgba(13,31,60,0.15);
+  display: block;
+  margin: 0 auto;               /* box model: margin auto-centers image */
+}
+
+/* Placeholder when no photo is uploaded */
+.ski-photo-placeholder {
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(135deg, #d0e8f7, #b0d0ee); /* custom background */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4477aa;               /* font color */
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: 2px dashed #90b8d8;  /* box model: dashed border */
+}
+
+/* Responsive video wrapper div */
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;
+  padding-bottom: 56.25%;       /* box model: padding-bottom for 16:9 ratio */
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #ddeeff;   /* box model: border around video */
+  box-shadow: 0 6px 24px rgba(13,31,60,0.2);
 }
 
 .video-wrapper iframe {
@@ -82,5 +451,42 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+}
+
+/* Tableau embed container */
+.tableau-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #c8dff4;   /* box model: border */
+  padding: 0;                   /* box model: no extra padding so viz fills edge-to-edge */
+}
+
+.tableau-note {
+  text-align: center;           /* text-align: center */
+  color: #556080;               /* font color */
+  font-size: 0.9rem;
+  margin-top: 12px;             /* box model: margin */
+  padding: 0 10px;              /* box model: padding */
+}
+
+
+/* =====================================================
+   SECTION 10: Footer links
+   ===================================================== */
+
+.footer-note {
+  color: #889aaa;               /* font color: muted */
+  font-size: 0.85rem;
+  margin-top: 14px;             /* box model: margin */
+}
+
+
+/* =====================================================
+   SECTION 11: Responsive — smaller screens
+   ===================================================== */
+
+@media (max-width: 640px) {
+  .ski-title { font-size: 2.1rem; }
+  .ski-two-col { grid-template-columns: 1fr; } /* stack columns on mobile */
+  .ski-card { padding: 24px 18px; }            /* box model: less padding on mobile */
 }

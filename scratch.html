@@ -1,103 +1,321 @@
 <!DOCTYPE html>
+<!-- html element: root of the document (HTML: html, head, body, title, h1) -->
 <html lang="en">
+
 <head>
+  <!-- head element: metadata not shown on page (HTML: html, head, body, title, h1) -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>My Skiing Page</title>
+
+  <!-- title element: shown in browser tab (HTML: html, head, body, title, h1) -->
+  <title>Colton Sessions | Life on the Slopes</title>
+
+  <!-- External stylesheet linked here — moves CSS out of HTML for reuse (Moving to External Stylesheet) -->
   <link rel="stylesheet" href="css/ski.css">
 </head>
+
+<!-- body element: all visible page content lives here (HTML: html, head, body, title, h1) -->
 <body>
 
-  <div class="page-wrapper">
+  <!-- ============================================================
+       HTML COMMENT: Comments are not shown in the browser.
+       Used here to label sections for grading and collaboration.
+       (HTML: Commenting Your Code)
+       ============================================================ -->
 
-    <!-- Header div -->
-    <div class="header-box">
-      <h1>Life on the Slopes</h1>
-      <p>A page all about my passion for skiing</p>
-      <nav>
-        <a href="index.html" class="nav-link">Home</a> |
-        <a href="resume.html" class="nav-link">Resume</a> |
-        <a href="app.html" class="nav-link">Play My Ski App</a>
+  <!-- ============================================================
+       FIXED POSITIONING: The sticky nav stays on screen while
+       scrolling — anchored to the browser window, not the page.
+       (Fixed Positioning)
+       ============================================================ -->
+  <div class="ski-fixed-nav">
+    <!-- a (anchor) tags: href links to other pages (HTML: a, anchor, link, href, title) -->
+    <a href="index.html" title="Go to the home page">Home</a>
+    <a href="resume.html" title="View my resume">Resume</a>
+    <!-- on-page anchor link: href="#top" jumps to id="top" on this page
+         (HTML: on-page anchors and links) -->
+    <a href="#top" title="Back to top of this page">↑ Top</a>
+    <a href="app.html" title="Play the Ski Run Picker app">🎿 App</a>
+  </div>
+
+  <!-- ============================================================
+       HEADER DIV: z-index and layering — the header sits above
+       the page content using z-index in CSS.
+       Custom background-image (gradient) applied via CSS class.
+       (Positioning with Z-index and Float) (Custom Style Selectors)
+       ============================================================ -->
+  <!-- h1 element: largest heading on the page (HTML: html, head, body, title, h1) -->
+  <div class="ski-header">
+    <div class="header-overlay">
+      <h1 class="ski-title">Life on the Slopes</h1>
+
+      <!-- br: line break inside the subtitle (HTML: br, nesting, blank space, child elements) -->
+      <p class="ski-subtitle">
+        Colton Sessions &nbsp;·&nbsp; Skier &nbsp;·&nbsp; Mountain Chaser<br>
+        <span style="font-size: 0.9rem; opacity: 0.8;">Provo, Utah</span>
+      </p>
+
+      <!-- Navigation links with hover state styled in CSS
+           (Style Link States: hover, visited) -->
+      <nav class="ski-nav">
+        <a href="index.html" title="Professional home page">Home</a>
+        <a href="resume.html" title="My HTML resume">Resume</a>
+        <a href="app.html" title="My AI ski app">Ski App</a>
       </nav>
     </div>
+  </div>
 
-    <!-- Intro / image div -->
-    <div class="content-box">
-      <h2 id="top">Why I Love Skiing</h2>
-      <img src="images/ski-photo.jpg" alt="A skier going down a snowy mountain" class="ski-img">
-      <p>
-        Replace this paragraph with your own story — how you got into skiing, your favorite
-        memories on the mountain, and why it's a passion of yours. Talk about the feeling
-        of fresh powder, the views from the chairlift, or your favorite trip.
-      </p>
-    </div>
+  <!-- ============================================================
+       INTRO SECTION
+       id="top" is the target of the on-page anchor link above.
+       inline style applied directly on this tag — demonstrates
+       within-local-tag styling. (Within-local-tag Style and Span)
+       ============================================================ -->
+  <div id="top" class="ski-section" style="padding-top: 60px; padding-bottom: 60px;">
 
-    <!-- Nested list div -->
-    <div class="content-box">
+    <!-- ski-card div: box model — has padding, margin (auto-centered), and border
+         (Box Model: Margin, Padding, and Border) -->
+    <div class="ski-card">
+
+      <!-- span element used inline inside h2 to style one word differently
+           (Within-local-tag Style and Span) -->
+      <h2>Why I Love <span class="highlight-word">Skiing</span></h2>
+      <div class="orange-bar"></div>
+
+      <!-- ski-two-col div: float-based positioning — left column floats left,
+           right column fills remaining space. (Positioning with Z-index and Float) -->
+      <div class="ski-two-col">
+
+        <!-- Left column: text content in normal document flow -->
+        <div>
+          <!-- p element: paragraph with nested span for inline styling
+               (HTML: br, nesting, blank space, child elements)
+               (Within-local-tag Style and Span) -->
+          <p>
+            There's nothing quite like the feeling of dropping into a
+            <span class="highlight-word">fresh powder run</span> on a bluebird morning —
+            skis floating through untouched snow, cold air rushing past,
+            and the entire mountain to yourself.
+            Skiing isn't just a hobby for me; it's the thing I look forward to all year.
+          </p>
+
+          <p>
+            Growing up I learned to ski on smaller hills, but once I got a taste of real terrain
+            in <span class="inline-blue">Utah and Colorado</span>, I was completely hooked.
+            <span class="inline-blue">Park City, Snowbird, and Jackson Hole</span> are my home mountains —
+            there's something about speed, technique, and nature that keeps pulling me back.
+          </p>
+
+          <!-- highlight-box: custom class selector with background-color + border
+               Demonstrates text-align, underline, and box model in one element.
+               (Custom Style Selectors, Background, Underline, Align)
+               (Box Model: Margin, Padding, and Border) -->
+          <div class="highlight-box">
+            <!-- span with underline-accent class — text-decoration: underline applied in CSS
+                 (Custom Style Selectors, Background, Underline, Align) -->
+            <p>
+              <span class="underline-accent">Favorite memory:</span>
+              Dropping into the steeps at <span class="highlight-word">Snowbird</span>
+              on a January powder day with 18" of fresh snow — nothing beats it.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right column: stats box div -->
+        <div class="ski-stat-box">
+          <!-- span elements used for the big number and the label underneath
+               Parent: ski-stat div / Children: stat-num span + stat-label span
+               (HTML: br, nesting, blank space, child elements) -->
+          <div class="ski-stat">
+            <span class="stat-num">10+</span>
+            <span class="stat-label">Years Skiing</span>
+          </div>
+          <div class="ski-stat">
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Resorts Visited</span>
+          </div>
+          <div class="ski-stat">
+            <span class="stat-num">⛷️</span>
+            <span class="stat-label">Black Diamond Level</span>
+          </div>
+        </div>
+
+      </div><!-- end ski-two-col -->
+    </div><!-- end ski-card -->
+  </div><!-- end intro section -->
+
+  <!-- ============================================================
+       NESTED LISTS SECTION
+       ol contains ul — unordered list embedded in an ordered list.
+       (HTML: ol, ul, li, lists, unordered, ordered, listitem)
+       ============================================================ -->
+  <div class="ski-section alt-bg">
+    <div class="ski-card">
       <h2>My Favorite Resorts</h2>
-      <p>Ranked by region — an ordered list of regions, each with an unordered list of resorts:</p>
-      <ol>
+      <div class="orange-bar"></div>
+      <p class="section-intro">Ranked by region — an ordered list of regions, each with an unordered list of resorts:</p>
+
+      <!-- ol: ordered list — numbered regions (HTML: ol, ul, li) -->
+      <ol class="resort-list">
+
+        <!-- li: list item — parent element containing a nested ul child
+             (HTML: br, nesting, blank space, child elements) -->
         <li>
-          Colorado
+          <span class="region-label">Utah</span>
+          <!-- ul: unordered list — nested inside this ol list item (HTML: ol, ul, li) -->
           <ul>
-            <li>Vail</li>
-            <li>Breckenridge</li>
-            <li>Aspen</li>
+            <li>🏔️ Park City Mountain — great variety, fun terrain parks</li>
+            <li>🏔️ Snowbird — steep, deep powder, serious terrain</li>
+            <li>🏔️ Alta — legendary snow quality, skiers-only vibe</li>
           </ul>
         </li>
+
         <li>
-          Utah
+          <span class="region-label">Wyoming</span>
           <ul>
-            <li>Park City</li>
-            <li>Snowbird</li>
+            <li>🏔️ Jackson Hole — biggest vertical in the US, incredible steeps</li>
+            <li>🏔️ Grand Targhee — off the beaten path, tons of powder</li>
           </ul>
         </li>
+
         <li>
-          Wyoming
+          <span class="region-label">Colorado</span>
           <ul>
-            <li>Jackson Hole</li>
-            <li>Grand Targhee</li>
+            <li>🏔️ Vail — massive, world-class Back Bowls</li>
+            <li>🏔️ Breckenridge — great town + mountain combo</li>
+            <li>🏔️ Aspen — iconic, challenging terrain</li>
           </ul>
         </li>
+
       </ol>
     </div>
+  </div>
 
-    <!-- Video div -->
-    <div class="content-box video-box">
-      <h2>A Favorite Ski Run / Edit</h2>
-      <p>Here's a video I love — replace the link below with a video of your choice.</p>
+  <!-- ============================================================
+       IMAGE SECTION
+       img tag with src, alt, width, height attributes.
+       (HTML: img, attributes, src, height, width, alt)
+       ============================================================ -->
+  <div class="ski-section">
+    <div class="ski-card text-center">
+      <h2>On the Mountain</h2>
+      <div class="orange-bar"></div>
+
+      <!-- img element: src = file path, alt = text description,
+           width and height control display size.
+           (HTML: img, attributes, src, height, width, alt) -->
+      <img
+        src="images/ski-photo.jpg"
+        alt="Colton Sessions skiing down a snowy mountain run"
+        width="700"
+        height="467"
+        class="ski-photo"
+        onerror="this.style.display='none'; document.getElementById('ski-placeholder').style.display='flex';">
+
+      <!-- Fallback placeholder shown if the image file is missing -->
+      <div id="ski-placeholder" class="ski-photo-placeholder" style="display:none;">
+        <span>📸 Upload a ski photo as images/ski-photo.jpg</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       VIDEO SECTION
+       Embedded YouTube video using an iframe.
+       Note: this will not play locally — works once hosted online.
+       ============================================================ -->
+  <div class="ski-section alt-bg">
+    <div class="ski-card">
+      <h2>A Run Worth Watching</h2>
+      <div class="orange-bar"></div>
+      <p class="section-intro">One of my favorite ski edits — pure skiing at its best.</p>
+
+      <!-- video-wrapper div: relative positioning + padding-bottom trick for 16:9 ratio.
+           iframe positioned absolute inside it.
+           (Introduction to Positioning) -->
       <div class="video-wrapper">
         <iframe
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          title="YouTube video player"
+          src="https://www.youtube.com/embed/fbqHK8i-HdA?start=344"
+          title="Ski video — YouTube embed"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>
     </div>
+  </div>
 
-    <!-- Tableau div -->
-    <div class="content-box">
-      <h2>Snowfall Data</h2>
-      <p>An interactive Tableau visualization (replace the embed below with your own):</p>
-      <div class='tableauPlaceholder' style='width:100%; height:600px;'>
-        <object class='tableauViz' style='display:none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='path' value='shared/REPLACE_WITH_YOUR_VIZ_PATH' />
-          <param name='toolbar' value='yes' />
-        </object>
+  <!-- ============================================================
+       TABLEAU INTERACTIVE VISUALIZATION
+       Live, interactive embedded Tableau graph.
+       ============================================================ -->
+  <div class="ski-section">
+    <div class="ski-card">
+      <h2>Snowfall Data Visualization</h2>
+      <div class="orange-bar"></div>
+      <p class="section-intro">
+        Interactive ski resort data — hover, click, and filter to explore.
+      </p>
+      <div class="tableau-wrapper">
+        <div class='tableauPlaceholder' id='viz1781569924475' style='position: relative'>
+          <noscript>
+            <a href='#'>
+              <img alt='Sheet 1'
+                   src='https://public.tableau.com/static/images/F7/F7K2M7WNW/1_rss.png'
+                   style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='path' value='shared/F7K2M7WNW' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/F7/F7K2M7WNW/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+          </object>
+        </div>
+        <script type='text/javascript'>
+          var divElement = document.getElementById('viz1781569924475');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          vizElement.style.width = '100%';
+          vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+        <p class="tableau-note">💡 Tip: hover, click, and filter to explore the data interactively!</p>
       </div>
-      <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
     </div>
+  </div>
 
-    <!-- Back to top anchor link -->
-    <div class="content-box">
-      <p><a href="#top" class="nav-link">↑ Back to top</a></p>
-      <p><a href="index.html" class="nav-link">← Back to my professional pages</a></p>
+  <!-- ============================================================
+       FOOTER / NAVIGATION BACK
+       On-page anchor link (#top) and links back to professional pages.
+       (HTML: on-page anchors and links)
+       (HTML: a, anchor, link, href, title)
+       ============================================================ -->
+  <div class="ski-section alt-bg">
+    <div class="ski-card text-center">
+
+      <!-- a href="#top": on-page anchor — jumps to id="top" at the top of this page
+           (HTML: on-page anchors and links) -->
+      <p>
+        <a href="#top" class="ski-link" title="Jump back to the top of this page">↑ Back to Top</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <!-- Relative path link to index.html in same folder
+             (HTML: Navigating Folder Structure) -->
+        <a href="index.html" class="ski-link" title="Go to my professional home page">← Back to Home</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="app.html" class="ski-link" title="Try my AI ski run picker app">🎿 Try the Ski Run Picker</a>
+      </p>
+
+      <p class="footer-note">&copy; 2026 Colton Sessions &nbsp;·&nbsp; BYU IS 201</p>
     </div>
-
   </div>
 
 </body>
